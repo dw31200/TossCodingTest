@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/introFragment">
+
+    <fragment
+        android:id="@+id/introFragment"
+        android:name="com.example.tosscodingtest.intro.IntroFragment"
+        android:label="IntroFragment" >
+        <action
+            android:id="@+id/action_introFragment_to_menuListFragment"
+            app:destination="@id/menuListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/menuListFragment"
+        android:name="com.example.tosscodingtest.menulist.MenuListFragment"
+        android:label="MenuListFragment" >
+        <action
+            android:id="@+id/action_menuListFragment_to_menuDetailFragment"
+            app:destination="@id/menuDetailFragment" >
+            <argument
+                android:name="menuId"
+                app:argType="integer"/>
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/menuDetailFragment"
+        android:name="com.example.tosscodingtest.menudetail.MenuDetailFragment"
+        android:label="MenuDetailFragment" >
+        <argument
+            android:name="menuId"
+            app:argType="integer"
+            android:defaultValue="-1"/>
+        <action
+            android:id="@+id/action_menuDetailFragment_to_menuCheckFragment"
+            app:destination="@id/menuCheckFragment" >
+            <argument
+                android:name="menuId"
+                app:argType="integer"/>
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/menuCheckFragment"
+        android:name="com.example.tosscodingtest.menucheck.MenuCheckFragment"
+        android:label="MenuCheckFragment" >
+        <argument
+            android:name="menuId"
+            app:argType="integer"
+            android:defaultValue="-1"/>
+    </fragment>
+</navigation>
