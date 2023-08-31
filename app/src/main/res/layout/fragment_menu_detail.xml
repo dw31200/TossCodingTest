@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -7,9 +7,148 @@
             name="vm"
             type="com.example.tosscodingtest.menudetail.MenuDetailViewModel" />
     </data>
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:bind="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/menu_detail_name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="@{vm.menuItem.name}"
+            tools:text="아메리카노"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/menu_detail_price"
+            app:layout_constraintStart_toStartOf="@id/menu_detail_name"
+            app:layout_constraintTop_toBottomOf="@id/menu_detail_name"
+            bind:priceToString="@{vm.menuItem.price}"
+            tools:text="1000원"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/menu_detail_temp_check_text"
+            bind:layout_constraintStart_toStartOf="@id/menu_detail_price"
+            bind:layout_constraintTop_toBottomOf="@id/menu_detail_price"
+            android:text="기본"
+            bind:visibility="@{vm.menuItem.isTempCheckable}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <RadioGroup
+            android:id="@+id/menu_detail_temp_check_group"
+            bind:layout_constraintStart_toStartOf="@id/menu_detail_temp_check_text"
+            bind:layout_constraintTop_toBottomOf="@id/menu_detail_temp_check_text"
+            bind:checkedButton="@{vm.menuItem.onlyIce}"
+            bind:visibility="@{vm.menuItem.isTempCheckable}"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/hot_button"
+                android:text="HOT"
+                bind:enabled="@{vm.menuItem.onlyIce}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <RadioButton
+                android:id="@+id/ice_button"
+                android:text="ICE"
+                bind:enabled="@{vm.menuItem.onlyIce}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/caffeine_check_text"
+            bind:layout_constraintStart_toStartOf="@id/menu_detail_temp_check_group"
+            bind:layout_constraintTop_toBottomOf="@id/menu_detail_temp_check_group"
+            android:text="디카페인"
+            bind:visibility="@{vm.menuItem.isCaffeineCheckable}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <RadioGroup
+            android:id="@+id/menu_detail_caffeine_check_group"
+            bind:layout_constraintStart_toStartOf="@id/caffeine_check_text"
+            bind:layout_constraintTop_toBottomOf="@id/caffeine_check_text"
+            android:checkedButton="@id/caffeine_button"
+            bind:visibility="@{vm.menuItem.isCaffeineCheckable}"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/caffeine_button"
+                android:text="카페인"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <RadioButton
+                android:id="@+id/decaffeine_button"
+                android:text="디카페인"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/ice_check_text"
+            bind:layout_constraintStart_toStartOf="@id/menu_detail_caffeine_check_group"
+            bind:layout_constraintTop_toBottomOf="@id/menu_detail_caffeine_check_group"
+            bind:icevisibility="@{vm.temp}"
+            android:text="얼음"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <RadioGroup
+            android:id="@+id/menu_detail_ice_check_group"
+            bind:layout_constraintStart_toStartOf="@id/ice_check_text"
+            bind:layout_constraintTop_toBottomOf="@id/ice_check_text"
+            android:checkedButton="@id/ice_small_button"
+            bind:icevisibility="@{vm.temp}"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/ice_small_button"
+                android:text="적게"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <RadioButton
+                android:id="@+id/ice_medium_button"
+                android:text="보통"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <RadioButton
+                android:id="@+id/ice_large_button"
+                android:text="많이"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RadioGroup>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/select_button"
+            bind:layout_constraintStart_toStartOf="parent"
+            bind:layout_constraintEnd_toEndOf="parent"
+            bind:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="20dp"
+            android:text="선택"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

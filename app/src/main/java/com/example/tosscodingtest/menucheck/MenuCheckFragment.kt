@@ -29,6 +29,7 @@ class MenuCheckFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.vm = viewModel
+        binding.lifecycleOwner = this@MenuCheckFragment
     }
 
     override fun onDestroyView() {

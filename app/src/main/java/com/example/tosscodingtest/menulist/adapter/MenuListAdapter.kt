@@ -7,17 +7,31 @@ import com.example.tosscodingtest.data.model.MenuList
 import com.example.tosscodingtest.menulist.MenuNavigation
 
 class MenuListAdapter(
-    private val menuItems: MutableList<MenuList> = mutableListOf()
-) : RecyclerView.Adapter<MenuItemViewHolder>() {
+    private val menuItems: MutableList<MenuList> = mutableListOf(),
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     var menuNavigation: MenuNavigation? = null
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = MenuItemViewHolder(parent)
+    override fun getItemViewType(position: Int): Int {
+        return menuItems[position].type
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return when (viewType) {
+            MENU_HEADER -> MenuHeaderViewHolder(parent)
+            MENU -> MenuItemViewHolder(parent)
+            else -> MenuListBlankViewHolder(parent)
+        }
+    }
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        when (menuItems[position].type) {
+            MENU_HEADER -> (holder as MenuHeaderViewHolder).bind(menuItems[position])
+            MENU -> (holder as MenuItemViewHolder).bind(menuItems[position], menuNavigation)
+            else -> (holder as MenuListBlankViewHolder).bind()
+        }
+    }
 
     override fun getItemCount(): Int = menuItems.size
-
-    override fun onBindViewHolder(holder: MenuItemViewHolder, position: Int) {
-        holder.bind(menuItems[position], menuNavigation)
-    }
 
     @SuppressLint("NotifyDataSetChanged")
     fun fetchData(menuItems: List<MenuList>) {

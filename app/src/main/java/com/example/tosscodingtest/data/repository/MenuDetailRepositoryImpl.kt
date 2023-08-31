@@ -13,6 +13,6 @@ class MenuDetailRepositoryImpl @Inject constructor(
     }
 
     override suspend fun setItem(menuDetail: MenuDetail) {
-        menuDetailDao.update(menuDetail)
+        menuDetailDao.insert(menuDetail)
     }
 }

@@ -9,7 +9,7 @@ data class MenuList(
     val id: Int,
     val name: String,
     val price: Int,
-    val type: String,
+    val type: Int,
     val isTempCheckable: Boolean,
     val isOnlyIce: Boolean,
     val isCaffeineCheckable: Boolean,

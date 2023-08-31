@@ -12,7 +12,6 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 @Module
 object DataModule {
-
     @Singleton
     @Provides
     fun provideMenuDatabase(
@@ -23,6 +22,7 @@ object DataModule {
             MenuDatabase::class.java,
             "menu.db",
         )
+            .addMigrations(MIGRATION_1_2)
             .build()
     }
 

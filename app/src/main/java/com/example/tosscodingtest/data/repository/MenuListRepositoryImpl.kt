@@ -8,9 +8,12 @@ import javax.inject.Inject
 class MenuListRepositoryImpl @Inject constructor(
     private val menuListDao: MenuListDao,
 ) : MenuListRepository {
-
     override fun getAll(): Flow<List<MenuList>> {
         return menuListDao.getAll()
+    }
+
+    override fun getItem(id: Int): Flow<MenuList> {
+        return menuListDao.getItem(id)
     }
 
     override suspend fun setList(menuList: List<MenuList>) {

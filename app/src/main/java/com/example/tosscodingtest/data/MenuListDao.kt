@@ -9,9 +9,11 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface MenuListDao {
-
     @Query("SELECT * FROM menuList ORDER BY ID ASC")
     fun getAll(): Flow<List<MenuList>>
+
+    @Query("SELECT * FROM menuList WHERE id = :id")
+    fun getItem(id: Int): Flow<MenuList>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun setList(menuList: List<MenuList>)
