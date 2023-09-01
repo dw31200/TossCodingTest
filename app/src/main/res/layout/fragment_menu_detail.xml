@@ -7,147 +7,193 @@
             name="vm"
             type="com.example.tosscodingtest.menudetail.MenuDetailViewModel" />
     </data>
-    <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:bind="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:padding="30dp">
 
         <TextView
             android:id="@+id/menu_detail_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{vm.menuItem.name}"
+            android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:text="@{vm.menuItem.name}"
-            tools:text="아메리카노"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            tools:text="아메리카노" />
 
         <TextView
             android:id="@+id/menu_detail_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
             app:layout_constraintStart_toStartOf="@id/menu_detail_name"
             app:layout_constraintTop_toBottomOf="@id/menu_detail_name"
             bind:priceToString="@{vm.menuItem.price}"
-            tools:text="1000원"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            tools:text="1000원" />
 
         <TextView
             android:id="@+id/menu_detail_temp_check_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="기본"
+            android:textSize="30sp"
             bind:layout_constraintStart_toStartOf="@id/menu_detail_price"
             bind:layout_constraintTop_toBottomOf="@id/menu_detail_price"
-            android:text="기본"
-            bind:visibility="@{vm.menuItem.isTempCheckable}"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            bind:visibility="@{vm.menuItem.isTempCheckable}" />
 
         <RadioGroup
             android:id="@+id/menu_detail_temp_check_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            bind:checkedButton="@{vm.menuItem.onlyIce}"
             bind:layout_constraintStart_toStartOf="@id/menu_detail_temp_check_text"
             bind:layout_constraintTop_toBottomOf="@id/menu_detail_temp_check_text"
-            bind:checkedButton="@{vm.menuItem.onlyIce}"
-            bind:visibility="@{vm.menuItem.isTempCheckable}"
-            android:orientation="horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            bind:visibility="@{vm.menuItem.isTempCheckable}">
 
             <RadioButton
                 android:id="@+id/hot_button"
-                android:text="HOT"
-                bind:enabled="@{vm.menuItem.onlyIce}"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:background="@drawable/radio_button"
+                android:button="@null"
+                android:padding="5dp"
+                android:text="HOT"
+                android:textColor="@drawable/radio_text"
+                android:textSize="30sp"
+                bind:enabled="@{vm.menuItem.onlyIce}" />
 
             <RadioButton
                 android:id="@+id/ice_button"
-                android:text="ICE"
-                bind:enabled="@{vm.menuItem.onlyIce}"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:background="@drawable/radio_button"
+                android:button="@null"
+                android:padding="5dp"
+                android:text="ICE"
+                android:textColor="@drawable/radio_text"
+                android:textSize="30sp"
+                bind:enabled="@{vm.menuItem.onlyIce}" />
 
         </RadioGroup>
 
         <TextView
             android:id="@+id/caffeine_check_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="디카페인"
+            android:textSize="30sp"
             bind:layout_constraintStart_toStartOf="@id/menu_detail_temp_check_group"
             bind:layout_constraintTop_toBottomOf="@id/menu_detail_temp_check_group"
-            android:text="디카페인"
-            bind:visibility="@{vm.menuItem.isCaffeineCheckable}"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            bind:visibility="@{vm.menuItem.isCaffeineCheckable}" />
 
         <RadioGroup
             android:id="@+id/menu_detail_caffeine_check_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checkedButton="@id/caffeine_button"
+            android:orientation="horizontal"
             bind:layout_constraintStart_toStartOf="@id/caffeine_check_text"
             bind:layout_constraintTop_toBottomOf="@id/caffeine_check_text"
-            android:checkedButton="@id/caffeine_button"
-            bind:visibility="@{vm.menuItem.isCaffeineCheckable}"
-            android:orientation="horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            bind:visibility="@{vm.menuItem.isCaffeineCheckable}">
 
             <RadioButton
                 android:id="@+id/caffeine_button"
-                android:text="카페인"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:background="@drawable/radio_button"
+                android:button="@null"
+                android:padding="5dp"
+                android:text="카페인"
+                android:textColor="@drawable/radio_text"
+                android:textSize="30sp" />
 
             <RadioButton
                 android:id="@+id/decaffeine_button"
-                android:text="디카페인"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:background="@drawable/radio_button"
+                android:button="@null"
+                android:padding="5dp"
+                android:text="디카페인"
+                android:textColor="@drawable/radio_text"
+                android:textSize="30sp" />
 
         </RadioGroup>
 
         <TextView
             android:id="@+id/ice_check_text"
-            bind:layout_constraintStart_toStartOf="@id/menu_detail_caffeine_check_group"
-            bind:layout_constraintTop_toBottomOf="@id/menu_detail_caffeine_check_group"
-            bind:icevisibility="@{vm.temp}"
-            android:text="얼음"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:text="얼음"
+            android:textSize="30sp"
+            bind:icevisibility="@{vm.temp}"
+            bind:layout_constraintStart_toStartOf="@id/menu_detail_caffeine_check_group"
+            bind:layout_constraintTop_toBottomOf="@id/menu_detail_caffeine_check_group" />
 
         <RadioGroup
             android:id="@+id/menu_detail_ice_check_group"
-            bind:layout_constraintStart_toStartOf="@id/ice_check_text"
-            bind:layout_constraintTop_toBottomOf="@id/ice_check_text"
-            android:checkedButton="@id/ice_small_button"
-            bind:icevisibility="@{vm.temp}"
-            android:orientation="horizontal"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:checkedButton="@id/ice_small_button"
+            android:orientation="horizontal"
+            bind:icevisibility="@{vm.temp}"
+            bind:layout_constraintStart_toStartOf="@id/ice_check_text"
+            bind:layout_constraintTop_toBottomOf="@id/ice_check_text">
 
             <RadioButton
                 android:id="@+id/ice_small_button"
-                android:text="적게"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:background="@drawable/radio_button"
+                android:button="@null"
+                android:padding="5dp"
+                android:text="적게"
+                android:textColor="@drawable/radio_text"
+                android:textSize="30sp" />
 
             <RadioButton
                 android:id="@+id/ice_medium_button"
-                android:text="보통"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:background="@drawable/radio_button"
+                android:button="@null"
+                android:padding="5dp"
+                android:text="보통"
+                android:textColor="@drawable/radio_text"
+                android:textSize="30sp" />
 
             <RadioButton
                 android:id="@+id/ice_large_button"
-                android:text="많이"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:background="@drawable/radio_button"
+                android:button="@null"
+                android:padding="5dp"
+                android:text="많이"
+                android:textColor="@drawable/radio_text"
+                android:textSize="30sp" />
 
         </RadioGroup>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/select_button"
-            bind:layout_constraintStart_toStartOf="parent"
-            bind:layout_constraintEnd_toEndOf="parent"
-            bind:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
             android:text="선택"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:textSize="30sp"
+            bind:layout_constraintBottom_toBottomOf="parent"
+            bind:layout_constraintEnd_toEndOf="parent"
+            bind:layout_constraintStart_toStartOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

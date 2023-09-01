@@ -30,17 +30,17 @@ fun TextView.setTextFromPrice(number: Int?) {
 
 @BindingAdapter("bind:tempToString")
 fun TextView.setTextFromTemp(temp: Temp) {
-    text = temp.toString()
+    text = temp.toString() + "/"
 }
 
 @BindingAdapter("bind:caffeineToString")
 fun TextView.setTextFromCaffeine(caffeine: Caffeine) {
-    text = "/" + caffeine.toString()
+    text = caffeine.toString() + "/"
 }
 
 @BindingAdapter("bind:iceSizeToString")
 fun TextView.setTextFromIceSize(iceSize: IceSize) {
-    text = "/" + iceSize.toString()
+    text = iceSize.toString()
 }
 
 @BindingAdapter("bind:visibility")

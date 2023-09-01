@@ -16,6 +16,7 @@ class IntroFragment : Fragment() {
     private var _binding: FragmentIntroBinding? = null
     private val binding
         get() = _binding!!
+    private val viewModel: IntroViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,6 +30,8 @@ class IntroFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.vm = viewModel
+        binding.lifecycleOwner = this@IntroFragment
         binding.navigateListButton.setOnClickListener {
             findNavController().navigate(R.id.action_introFragment_to_menuListFragment)
         }

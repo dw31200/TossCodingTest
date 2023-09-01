@@ -49,4 +49,9 @@
             app:argType="integer"
             android:defaultValue="-1"/>
     </fragment>
+    <action
+        android:id="@+id/action_global_introFragment"
+        app:destination="@id/introFragment"
+        app:launchSingleTop="true"
+        app:popUpTo="@id/introFragment"/>
 </navigation>

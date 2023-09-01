@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="lineColor">@color/white</color>
+    <color name="radioText">@color/white</color>
+    <color name="radioBackground">@color/black</color>
+</resources>
